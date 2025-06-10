@@ -1,0 +1,389 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cleese Assignment (For Students)
+% LaTeX Template
+% Version 4.0 (10/06/2025)
+%
+% This template originates from: http://www.LaTeXTemplates.com
+%
+% Author:
+%   Original: Vel (vel@LaTeXTemplates.com)
+%   Modified Jacky.Li - Added some custom commands, modified some displays and added code listing support
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{lastpage} % Required to determine the last page number for the footer
+\usepackage{graphicx} % Required to insert images
+
+% \setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\usepackage[most]{tcolorbox} % Required for boxes that split across pages
+\usepackage{booktabs} % Required for better horizontal rules in tables
+\usepackage{etoolbox} % Required for if statements
+
+% \usepackage{ulem} % Cannot use with algorithm2e used in `code-style.tex`
+
+% \usepackage{setspace}
+% \renewcommand{\baselinestretch}{1.0}
+
+% \usepackage{subcaption}
+
+\usepackage{float}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{cprotect}
+
+\usepackage{xurl}
+\usepackage[colorlinks=true,linkcolor=blue, citecolor=violet]{hyperref}
+
+% \usepackage{bookmark}
+
+\usepackage[inline]{enumitem}
+
+\newlist{refer-enum}{enumerate}{1}
+\setlist[refer-enum]{label=[\arabic*].,before=\raggedright}
+\newenvironment{reference}{%
+  \vspace{1em}
+  \par \textbf{Reference}:
+  \begin{refer-enum}
+  }{%
+  \end{refer-enum}
+}
+
+\usepackage{ifthen}
+
+\usepackage{siunitx}
+
+\renewcommand{\d}{\: \mathrm{d} }
+\newcommand{\e}{\mathrm{e}}
+
+\newcommand{\ds}{\displaystyle}
+
+% Used for time complexity
+\newcommand{\OO}{\mathcal{O}}
+\newcommand{\TT}{\Theta}
+\newcommand{\RR}{\mathbb{R} }
+\newcommand{\abs}[1]{|#1|}
+\newcommand{\Abs}[1]{\left|#1\right|}
+\newcommand{\norm}[1]{\|#1\|}
+\newcommand{\normone}[1]{\|#1\|_1}
+\newcommand{\normtwo}[1]{\|#1\|_2}
+\newcommand{\norminf}[1]{\|#1\|_\infty}
+
+\newcommand{\TODO}[1]{{\bfseries \textcolor{red}{TODO\@: #1}}}
+\newcommand{\modify}[2]{\textcolor{gray}{\sout{#1}} \textcolor{blue}{#2}}
+
+%----------------------------------------------------------------------------------------
+%  FONT
+%----------------------------------------------------------------------------------------
+% \usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+
+\newcommand*{\defaultfont}{\fontfamily{lmr}\selectfont}
+
+\usepackage[sfdefault, light]{roboto}
+
+%----------------------------------------------------------------------------------------
+%  MARGINS
+%----------------------------------------------------------------------------------------
+\usepackage{geometry} % Required for adjusting page dimensions and margins
+\geometry{
+  paper=a4paper, % Change to letterpaper for US letter
+  top=3cm, % Top margin
+  bottom=3cm, % Bottom margin
+  left=2.5cm, % Left margin
+  right=2.5cm, % Right margin
+  headheight=14pt, % Header height
+  footskip=1.4cm, % Space from the bottom margin to the baseline of the footer
+  headsep=1.2cm, % Space from the top margin to the baseline of the header
+  % showframe, % Uncomment to show how the type block is set on the page
+}
+
+%----------------------------------------------------------------------------------------
+%  HEADERS AND FOOTERS
+%----------------------------------------------------------------------------------------
+\usepackage{fancyhdr} % Required for customizing headers and footers
+\pagestyle{fancy} % Enable custom headers and footers
+
+% Left header
+% Output the instructor in brackets if one was set
+\lhead{\small\assignmentClass\ifdef{\assignmentClassInstructor}{\ (\assignmentClassInstructor):}{}\ \assignmentTitle}
+% Centre header
+\chead{}
+% Right header
+% Output the author name if one was set, otherwise the due date if that was set
+\rhead{\small\ifdef{\assignmentAuthorName}{\assignmentAuthorName}{\ifdef{\assignmentDueDate}{Due\ \assignmentDueDate}{}}}
+
+\lfoot{} % Left footer
+\cfoot{\small Page\ \thepage\ of\ \pageref{LastPage}} % Centre footer
+\rfoot{} % Right footer
+
+\renewcommand\headrulewidth{0.5pt} % Thickness of the header rule
+
+%----------------------------------------------------------------------------------------
+%  MODIFY SECTION STYLES
+%----------------------------------------------------------------------------------------
+\usepackage{titlesec} % Required for modifying sections
+
+%------------------------------------------------
+% Section
+% \titleformat{<command>}[<shape>]{<format>}{<label>}{<sep>}{<before-code>}[<after-code>]
+\titleformat{\section} %
+[block] %
+{\Large\bfseries} %
+{\assignmentQuestionName~\thesection} %
+{3pt} %
+{\mdseries\itshape} % ChkTeX 6
+
+% Spacing around section titles, the order is: left, before and after
+% \titlespacing{<command>}{<left>}{<before-sep>}{<after-sep>}[<right-sep>]
+\titlespacing{\section} %
+{0pt} %
+{0.5\baselineskip} %
+{0.5\baselineskip}
+
+%------------------------------------------------
+% Subsection
+\titleformat{\subsection} %
+[block] %
+{\itshape \bfseries} % ChkTeX 6
+{\arabic{section}.\arabic{subsection}} %
+{4pt} %
+{}
+
+\titlespacing{\subsection} %
+{1.5em} %
+{0.5\baselineskip} %
+{0.5\baselineskip}
+
+\renewcommand\thesubsection{(\alph{subsection})}
+
+%------------------------------------------------
+% subsubsection
+\titleformat{\subsubsection}
+[runin]
+{\itshape \bfseries} % ChkTeX 6
+{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}
+{4pt}
+{}
+
+\titlespacing{\subsubsection}
+{3em}
+{0.5\baselineskip}
+{0.5\baselineskip}
+
+\renewcommand\thesubsubsection{\arabic{subsubsection}.}
+
+%----------------------------------------------------------------------------------------
+%  CUSTOM QUESTION COMMANDS/ENVIRONMENTS
+%----------------------------------------------------------------------------------------
+% Environment to be used for each question in the assignment
+\newenvironment{question}[2][]{
+  \pdfbookmark[0]{\assignmentQuestionName{} \the\numexpr\value{section}+1\relax}{\assignmentQuestionName{} \the\numexpr\value{section}+1\relax}
+  \hypersetup{bookmarksdepth=-1}
+  \ifthenelse{\equal{#1}{}}{
+    \ifthenelse{\equal{#2}{}}{
+    \section{}}{
+    \section{--- #2}} %
+    % \everymath={\displaystyle}
+  }{
+    \ifthenelse{\equal{#2}{}}{
+    \section{{\Large\bfseries(#1)}}}{
+    \section{{\Large\bfseries(#1)} --- #2}} %
+  }
+  \hypersetup{bookmarksdepth} %back
+  % Set the left footer to state the question continues on the next page, this is reset to nothing if it doesn't (below)
+  \lfoot{\small\itshape\assignmentQuestionName~\thesection~continued on next page\ldots} % ChkTeX 6
+}{
+  % Reset the left footer to nothing if the current question does not continue on the next page
+  \lfoot{}
+}
+
+%------------------------------------------------
+% Environment for subquestions
+\newenvironment{subquestion}[2][]{
+  \pdfbookmark[1]{\the\value{section}.\the\numexpr\value{subsection}+1\relax}{\the\value{section}.\the\numexpr\value{subsection}+1\relax}
+  \hypersetup{bookmarksdepth=-1}
+  \ifthenelse{\equal{#1}{}}{
+    \ifthenelse{\equal{#2}{}}{
+    \subsection{}}{
+    \subsection{#2}} %
+  }{
+    \ifthenelse{\equal{#2}{}}{
+    \subsection{(#1)}}{
+    \subsection{(#1)\ #2}} %
+  }
+  \hypersetup{bookmarksdepth} % back
+}{
+}
+
+% Environment for subsubquestions, takes 1 argument - the score
+\newenvironment{subsubquestion}[2][]{
+  \pdfbookmark[2]{\the\value{section}.\the\value{subsection}.\the\numexpr\value{subsubsection}+1\relax}{\the\value{section}.\the\value{subsection}.\the\numexpr\value{subsubsection}+1\relax}
+  \hypersetup{bookmarksdepth=-1}
+  \ifthenelse{\equal{#1}{}}{
+    \ifthenelse{\equal{#2}{}}{
+    \subsubsection{}}{
+    \subsubsection{#2}}%
+  }{
+    \ifthenelse{\equal{#2}{}}{
+    \subsubsection{(#1)}}{
+    \subsubsection{(#1)\ #2}}%
+  }
+  \hypersetup{bookmarksdepth} % back
+}{ %
+}
+
+\newenvironment{answer}{
+  \begin{tcolorbox}[%
+      breakable,%
+      enhanced,%
+      title=Answer,%
+      title filled,%
+      colframe=red!50!white,%
+      colbacktitle=red!50!white,%
+      attach boxed title to top left = {yshift = -3mm, xshift = 5mm},%
+      colback=red!1%
+    ]
+    % \fontfamily{Xcharter}\selectfont
+    \vspace{0.5em}
+    % \fontfamily{cmr}\selectfont
+    \defaultfont
+    % \everymath={\displaystyle}
+  }{
+  \end{tcolorbox}
+}
+
+\newenvironment{subanswer}{
+  \begin{tcolorbox}[%
+      enlarge left by = 1.5em,%
+      width = \linewidth - 1.5em,%
+      breakable,%
+      enhanced,%
+      title=Answer,%
+      title filled,%
+      colframe=red!50!white,%
+      colbacktitle=red!50!white,%
+      attach boxed title to top left = {yshift = -3mm, xshift = 5mm},%
+      colback=red!1%
+    ]
+    % \fontfamily{Xcharter}\selectfont
+    \vspace{0.5em}
+    % \fontfamily{cmr}\selectfont
+    \defaultfont
+    % \everymath={\displaystyle}
+  }{
+  \end{tcolorbox}
+}
+
+\newenvironment{subsubanswer}{
+  \begin{tcolorbox}[%
+      enlarge left by = 3em,%
+      width = \linewidth - 3em,
+      breakable,%
+      enhanced,%
+      title=Answer,%
+      title filled,%
+      colframe=red!50!white,%
+      colbacktitle=red!50!white,%
+      attach boxed title to top left = {yshift = -3mm, xshift = 5mm},%
+      colback=red!1%
+    ]
+    % \fontfamily{Xcharter}\selectfont
+    \vspace{0.5em}
+    % \fontfamily{cmr}\selectfont
+    \defaultfont
+    % \everymath={\displaystyle}
+  }{
+  \end{tcolorbox}
+}
+
+%------------------------------------------------
+% Command to print an assignment section title to split an assignment into major parts
+\newcommand{\assignmentSection}[1]{ %
+  { %
+    \centering % Centre the section title
+    \vspace{2\baselineskip} % Whitespace before the entire section title
+    \rule{0.8\textwidth}{0.5pt} % Horizontal rule
+    \vspace{0.75\baselineskip} % Whitespace before the section title
+    {\LARGE \MakeUppercase{#1}} % Section title, forced to be uppercase
+    \rule{0.8\textwidth}{0.5pt} % Horizontal rule
+    \vspace{\baselineskip} % Whitespace after the entire section title
+  } %
+}
+
+%----------------------------------------------------------------------------------------
+%  TITLE PAGE
+%----------------------------------------------------------------------------------------
+\author{\textbf{\assignmentAuthorName} \ifdef{\studentID}{\\[1em] \studentID}{}} % Set the default title page author field
+\date{} % Don't use the default title page date field
+
+\title{
+  \thispagestyle{empty} % Suppress headers and footers
+  \vspace{0.2\textheight} % Whitespace before the title
+  \textbf{\assignmentClass:\ \assignmentTitle}\\[-4pt]
+  \ifdef{\assignmentDueDate}{{\small Due\ on\ \assignmentDueDate}\\}{} % If a due date is supplied, output it
+  \ifdef{\assignmentClassInstructor}{{\large \textit{\assignmentClassInstructor}}}{} % If an instructor is supplied, output it
+  \vspace{0.32\textheight} % Whitespace before the author name
+}
+
+%----------------------------------------------------------------------------------------
+%  WARNING TEXT ENVIRONMENT
+%----------------------------------------------------------------------------------------
+\usepackage[framemethod=tikz]{mdframed}
+
+\mdfdefinestyle{warning}{ %
+  topline=false, bottomline=false, %
+  leftline=false, rightline=false, %
+  nobreak, %
+  singleextra={ %
+    \draw(P-|O)++(-0.5em,0)node(tmp1){}; % ChkTeX 36
+    \draw(P-|O)++(0.5em,0)node(tmp2){}; % ChkTeX 36
+    \fill[black,rotate around={45:(P-|O)}](tmp1)rectangle(tmp2); % ChkTeX 36
+    \node at(P-|O){\color{white}\scriptsize\bf!}; % ChkTeX 36 ChkTeX 1
+    \draw[very thick](P-|O)++(0,-1em)--(O);% --(O-|P); % ChkTeX 36
+  }
+}
+
+% Define a custom environment for warning text
+% Set the default warning to "Warning:"
+\newenvironment{warn}[1][Warning:]{ %
+  \medskip %
+  \begin{mdframed}[style=warning] %
+    \noindent{\textbf{#1}} %
+  }{ %
+  \end{mdframed} %
+}
+
+%----------------------------------------------------------------------------------------
+%  INFORMATION ENVIRONMENT
+%----------------------------------------------------------------------------------------
+\mdfdefinestyle{info}{%
+  topline=false, bottomline=false,
+  leftline=false, rightline=false,
+  nobreak,
+  singleextra={%
+    % Redundant two temp nodes to make the left align consistent with the warning environment
+    \draw(P-|O)++(-0.5em,0)node(tmp1){}; % ChkTeX 36
+    \draw(P-|O)++(0.5em,0)node(tmp2){}; % ChkTeX 36
+    \fill[black](P-|O)circle[radius=0.4em]; % ChkTeX 36
+    \node at(P-|O){\color{white}\scriptsize\bf i}; % ChkTeX 1 % ChkTeX 36
+    \draw[very thick](P-|O)++(0,-0.8em)--(O);%--(O-|P); % ChkTeX 36
+  }
+}
+
+% Define a custom environment for information
+% Set the default title to "Info:"
+\newenvironment{info}[1][Info:]{ %
+  \medskip %
+  \begin{mdframed}[style=info] %
+    \noindent{\textbf{#1}} %
+  }{ %
+  \end{mdframed} %
+}
+
+%----------------------------------------------------------------------------------------
+%  SELF_DEFINED COMMANDS
+%----------------------------------------------------------------------------------------

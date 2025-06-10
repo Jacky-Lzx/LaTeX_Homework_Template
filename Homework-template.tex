@@ -1,0 +1,179 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cleese Assignment (For Students)
+% LaTeX Template
+% Version 4.0 (10/06/2025)
+%
+% This template originates from: http://www.LaTeXTemplates.com
+%
+% Author:
+%   Original: Vel (vel@LaTeXTemplates.com)
+%   Modified: Jacky.Li - Added some custom commands, modified some displays and added code listing support
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+
+\input{structure.tex}
+\input{code-style.tex}
+
+%----------------------------------------------------------------------------------------
+%  ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+% Required
+\newcommand{\assignmentQuestionName}{Question} % The word to be used as a prefix to question numbers; example alternatives: Problem, Exercise
+\newcommand{\assignmentClass}{VE373} % Course/class
+\newcommand{\assignmentTitle}{Assignment\ 1} % Assignment title or name
+\newcommand{\assignmentAuthorName}{Jacky.Li} % Student name
+\newcommand{\studentID}{123456789}
+% Optional (comment lines to remove)
+\newcommand{\assignmentClassInstructor}{teacher} % Instructor name/time/description
+\newcommand{\assignmentDueDate}{June 1, 2021} % Due date
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%  TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\maketitle % Print the title page
+
+\thispagestyle{empty} % Suppress headers and footers on the title page
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+%  QUESTIONS
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%  QUESTION 1
+%----------------------------------------------------------------------------------------
+\begin{question}[20\%]{Sample question}
+  What is the airspeed velocity of an unladen swallow?
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{./assets/swallow.jpg}
+  \end{figure}
+
+  \begin{answer}
+    While this question leaves out the crucial element of the geographic origin of the swallow, according to Jonathan Corum, an unladen European swallow maintains a cruising airspeed velocity of \textbf{11 metres per second}, or \textbf{24 miles an hour}. The velocity of the corresponding African swallows requires further research as kinematic data is severely lacking for these species.
+  \end{answer}
+
+\end{question}
+
+%----------------------------------------------------------------------------------------
+%  QUESTION 2
+%----------------------------------------------------------------------------------------
+\begin{question}{Subquestions}
+  Subquestions are supported
+
+  \begin{subquestion}[10\%]{This is a sub question}
+    \begin{subanswer}
+      According to the Associated Press (1988), a New York Fish and Wildlife technician named Richard Thomas calculated the volume of dirt in a typical 25--30 foot (7.6--9.1 m) long woodchuck burrow and had determined that if the woodchuck had moved an equivalent volume of wood, it could move ``about \textbf{700 pounds (320 kg)} on a good day, with the wind at his back''.
+    \end{subanswer}
+  \end{subquestion}
+
+  \begin{subquestion}{This is another sub question}
+    \begin{subsubquestion}{}
+      Subsub questions are also supported
+      \begin{subsubanswer}
+        This is the subsub answer
+      \end{subsubanswer}
+    \end{subsubquestion}
+  \end{subquestion}
+
+\end{question}
+
+%----------------------------------------------------------------------------------------
+%  QUESTION 3
+%----------------------------------------------------------------------------------------
+\begin{question}{}
+  Identify the author of Equation~\ref{eq:bayes} below and briefly describe it in English.
+  \begin{equation}\label{eq:bayes}
+    P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+  \end{equation}
+
+  \begin{info}
+    an info text.
+  \end{info}
+  \begin{info}[Information:]
+    an info message with a customized title.
+  \end{info}
+
+  \begin{warn}
+    a warning message.
+  \end{warn}
+  \begin{warn}[Warning:]
+    a warning message with a customized title.
+  \end{warn}
+
+  \begin{warn}
+    a long message can be wrapped automatically:
+    Labore duis nostrud qui velit cillum. Excepteur laborum ad adipisicing ad anim.
+  \end{warn}
+
+  \begin{answer}
+    Information and warning environments work in answers as well.
+    \begin{info}[Note:]
+      This is a note.
+    \end{info}
+
+    A predefined reference environment is also available, which can be used to list references at the end of the answer.
+    \begin{reference}
+    \item Reference 1
+    \item Reference 2
+    \end{reference}
+  \end{answer}
+\end{question}
+
+%----------------------------------------------------------------------------------------
+%  QUESTION 4
+%----------------------------------------------------------------------------------------
+\begin{question}[50\%]{Code display}
+
+  \begin{answer}
+    Long codes can cross pages.
+
+    \begin{lstlisting}[language=C++]
+#include <iostream>
+using namespace std;
+
+int main() {
+  // Print Hello world
+  cout << "Hello, World!" << endl;
+  /*
+   * Print Hello world
+   */
+  cout << "Quis voluptate enim aliqua ea. Id pariatur ut aliqua nisi aute ea cupidatat. Excepteur veniam com";
+
+  return 0;
+}
+    \end{lstlisting}
+
+    \begin{lstlisting}[language=Ruby,style=ruby_on_rails, caption={A ruby on rails code sample}]
+class PageController < ApplicationController
+  protect_from_forgery with: :exception
+  before_action :do_some_for_pages
+
+  '''
+  This action creates a new page
+  '''
+  def new
+    @page = Page.new
+    creator = current_user || @admin
+
+    # Check if a creator is present
+    if creator.present?
+      @page.creator = creator.email
+    end
+
+    @page.description = 'This is the default description'
+  end
+end
+    \end{lstlisting}
+  \end{answer}
+\end{question}
+
+\end{document}
